@@ -66,11 +66,11 @@ const AuthState = props => {
         }
 
         try {
-            const respuesta = await service.get('/api/auth')
-
+            const respuesta = await service.get('/auth')
+            console.log(respuesta)
             dispatch({
                 type: OBTENER_USUARIO,
-                payload: respuesta.data.usuario
+                payload: respuesta.data.user
             })
 
 
@@ -85,7 +85,7 @@ const AuthState = props => {
     // Cuando el usuario inicia sesión
     const iniciarSesion = async datos => {
         try{
-            const respuesta = await service.post('/api/auth', datos)
+            const respuesta = await service.post('/auth', datos)
             
             dispatch({
                 type: LOGIN_EXITOSO,

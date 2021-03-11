@@ -8,7 +8,8 @@ export default function Store() {
 
     useEffect(async()=>{
         
-          const productDB = await service.get("http://localhost:3001/product/all")
+          const productDB = await service.get("/product/all")
+          console.log(productDB)
           setProduct(productDB.data)
         
       },[])
@@ -18,7 +19,7 @@ export default function Store() {
         <>
     {
         product === undefined?(<img style={{flex:'display', justifyContent:'center', alignItems:'center'  }} style={{width:70}} src="https://res.cloudinary.com/dannblackfish/image/upload/v1615395373/deadstarclothing/gif/Logo-DS_a7t7bj.gif"/>):(
-        product.map((e,id)=>{
+        product.map((e,_id)=>{
         return(
             <>
             
@@ -32,7 +33,7 @@ export default function Store() {
                         <ul class="space-y-12 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 sm:space-y-0 lg:grid-cols-3 lg:gap-x-8">
 
                         <Link to={`/product/${e._id}`}>
-                            <li key={id}>
+                            <li key={_id}>
                             <div class="space-y-4">
                                 <div class="aspect-w-3 aspect-h-2">
                                 <img class="object-cover shadow-lg rounded-lg" src={e.image[0]} alt="" />

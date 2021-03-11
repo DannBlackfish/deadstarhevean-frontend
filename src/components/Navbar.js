@@ -1,6 +1,11 @@
-import React from 'react'
-
+import React, {useContext} from 'react'
+import AuthContext from '../context/autenticacion/AuthContext'
 export default function Navbar() {
+
+
+    const authctx = useContext(AuthContext)
+    console.log(authctx)
+
     return (
             <>
             {/* <!-- This example requires Tailwind CSS v2.0+ --> */}
@@ -69,7 +74,9 @@ export default function Navbar() {
                     <div>
                         <button type="button" class="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" id="user-menu" aria-expanded="false" aria-haspopup="true">
                         <span class="sr-only">Open user menu</span>
-                        <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=J4TTyWeNKF&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+                        {
+
+                        }
                         </button>
                     </div>
 

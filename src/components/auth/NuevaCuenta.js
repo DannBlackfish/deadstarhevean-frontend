@@ -14,7 +14,7 @@ export default function NuevaCuenta(props) {
 
     // State para iniciar sesión
     const [usuario, guardarUsuario] = useState({
-        nombre: "",
+        name: "",
         email: "",
         password: "",
         confirmar: ""
@@ -40,7 +40,7 @@ export default function NuevaCuenta(props) {
 
 
     // Extraer de usuario
-    const { nombre, email, password, confirmar } = usuario
+    const { name, email, password, confirmar } = usuario
 
     const onChange = (e) => {
         guardarUsuario({
@@ -80,7 +80,7 @@ export default function NuevaCuenta(props) {
 
         // pasarlo al action
         registrarUsuario({
-            nombre,
+            name,
             email, 
             password
         })
@@ -115,7 +115,7 @@ export default function NuevaCuenta(props) {
             Name
           </label>
           <div class="mt-1">
-            <input id="nombre" name="nombre" type="text" autocomplete="name" placeholder="Your name" onChange={onChange} value={nombre} required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+            <input id="nombre" name="name" type="text" autocomplete="name" placeholder="Your name" onChange={onChange} value={name} required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
           </div>
         </div>
 

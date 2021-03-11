@@ -10,7 +10,7 @@ export default function StoreProduct() {
 
   useEffect(async() => {
   
-      const detail = await service.get(`http://localhost:3001/product/detail/${idProduct}`)
+      const detail = await service.get(`/product/detail/${idProduct}`)
       console.log("este es el detail", detail)
       setProductDetail(detail.data)
   
