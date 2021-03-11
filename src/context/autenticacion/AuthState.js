@@ -2,7 +2,7 @@ import React, {useReducer} from 'react'
 import AuthContext from './AuthContext'
 import AuthReducer from './AuthReducer'
 
-import clienteAxios from '../../config/axios'
+import service from '../../config/axios'
 import tokenAuth from '../../config/token'
 
 import {
@@ -30,8 +30,11 @@ const AuthState = props => {
     
     // Registra un usuario
     const registrarUsuario = async datos => {
+        console.log("estoy en registrar usuarios")
+        console.log(datos)
         try{
-            const respuesta = await clienteAxios.post('/api/usuarios', datos)
+            const respuesta = await service.post('/user', datos)
+            console.log(respuesta)
             dispatch({
                 type: REGISTRO_EXITOSO,
                 payload: respuesta.data
@@ -63,7 +66,7 @@ const AuthState = props => {
         }
 
         try {
-            const respuesta = await clienteAxios.get('/api/auth')
+            const respuesta = await service.get('/api/auth')
 
             dispatch({
                 type: OBTENER_USUARIO,
@@ -82,7 +85,7 @@ const AuthState = props => {
     // Cuando el usuario inicia sesión
     const iniciarSesion = async datos => {
         try{
-            const respuesta = await clienteAxios.post('/api/auth', datos)
+            const respuesta = await service.post('/api/auth', datos)
             
             dispatch({
                 type: LOGIN_EXITOSO,

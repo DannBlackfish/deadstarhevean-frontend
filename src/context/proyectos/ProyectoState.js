@@ -13,7 +13,7 @@ import {
     PROYECTO_ERROR
 } from '../../types'
 
-import clienteAxios from '../../config/axios'
+import service from '../../config/axios'
 
 const ProyectoState = props => {
 
@@ -40,7 +40,7 @@ const ProyectoState = props => {
     const obtenerProyectos = async () => {
         try {
             
-            const resultado = await clienteAxios.get('/api/proyectos')
+            const resultado = await service.get('/api/proyectos')
 
             dispatch({
                 type: OBTENER_PROYECTOS,
@@ -63,7 +63,7 @@ const ProyectoState = props => {
     const agregarProyecto = async proyecto =>  {
 
         try {
-            const resultado = await clienteAxios.post('/api/proyectos', proyecto)
+            const resultado = await service.post('/api/proyectos', proyecto)
             console.log(resultado)
 
             // Insertar el proyecto en el state
@@ -107,7 +107,7 @@ const ProyectoState = props => {
     const eliminarProyecto = async proyectoId => {
 
         try {
-            await clienteAxios.delete(`/api/proyectos/${proyectoId}`)
+            await service.delete(`/api/proyectos/${proyectoId}`)
             dispatch({
                 type: ELIMINAR_PROYECTO,
                 payload: proyectoId

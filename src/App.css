@@ -1,6 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "react-alice-carousel/lib/scss/alice-carousel.scss";
+
+.alice-carousel{
+  height: 1000px;
+  width: 1000px;
+}
 
 .App {
   text-align: center;
