@@ -8,7 +8,7 @@ export default function Store() {
 
     useEffect(async()=>{
         
-          const productDB = await service.get("http://localhost:3001/product/all")
+          const productDB = await service.get("https://deadstarhevean.herokuapp.com/product/all")
           setProduct(productDB.data)
         
       },[])

@@ -9,7 +9,7 @@ export default function CategoryProduct() {
     const [categoryDetail, setCategoryDetail] = useState()
 
     useEffect(async() => {
-        const respuesta = await service.get(`http://localhost:3001/product/category/${categoria}`)
+        const respuesta = await service.get(`https://deadstarhevean.herokuapp.com/product/category/${categoria}`)
         setCategoryDetail(respuesta.data)
     }, [])
 

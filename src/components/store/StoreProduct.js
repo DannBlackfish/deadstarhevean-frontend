@@ -13,7 +13,7 @@ export default function StoreProduct(props) {
 
   useEffect(async() => {
   
-      const detail = await service.get(`http://localhost:3001/product/detail/${idProduct}`)
+      const detail = await service.get(`https://deadstarhevean.herokuapp.com/product/detail/${idProduct}`)
       console.log("este es el detail", detail)
       setProductDetail(detail.data)
 
