@@ -41,7 +41,7 @@ export default function Cart(props) {
         <div class="space-y-12 lg:grid lg:grid-cols-3 lg:gap-8 lg:space-y-0">
           <div class="space-y-5 sm:space-y-4">
             <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">SHOPPING BAG</h2>
-            <p class="text-xl text-gray-500">Nulla quam felis, enim faucibus proin velit, ornare id pretium. Augue ultrices sed arcu condimentum vestibulum suspendisse. Volutpat eu faucibus vivamus eget bibendum cras.</p>
+            <p class="text-xl text-gray-500">You can withdraw your purchases in store</p>
             <p class="text-xl text-gray-500">Subtotal</p>
             <p class="text-xl text-gray-500">total</p>
             <p class="text-xl text-gray-500">Checkout</p>

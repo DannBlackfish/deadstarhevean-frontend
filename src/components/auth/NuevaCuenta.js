@@ -102,7 +102,7 @@ export default function NuevaCuenta(props) {
   <div class="sm:mx-auto sm:w-full sm:max-w-md">
     <img class="mx-auto h-12 w-auto" src="/monograma_ds.png" alt="Workflow" />
     <h2 class="mt-6 text-center text-3xl font-extrabold text-pink-400">
-      Join us
+      Sign Up
     </h2>
   </div>
 
