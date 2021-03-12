@@ -5,7 +5,10 @@ import {
     OBTENER_USUARIO,
     LOGIN_EXITOSO,
     LOGIN_ERROR,
-    CERRAR_SESION
+    CERRAR_SESION,
+    AGREGAR_CARRITO,
+    EDITAR_USUARIO,
+    ELIMINAR_USUARIO    
 } from '../../types'
 
 export default (state, action) => {
@@ -20,6 +23,27 @@ export default (state, action) => {
                 autenticado: true,
                 mensaje: null
             }
+
+        case AGREGAR_CARRITO:
+            return {
+                ...state,
+                usuario: action.payload
+            }
+
+        case EDITAR_USUARIO:
+            return {
+                ...state,
+                usuario: action.payload
+            }
+
+
+
+            case ELIMINAR_USUARIO:
+                localStorage.removeItem('token')
+                return {
+                    ...state,
+                    usuario: null, autenticado: null
+                }
 
         case CERRAR_SESION:
         case LOGIN_ERROR:    
@@ -41,6 +65,8 @@ export default (state, action) => {
                 autenticado: true,
                 usuario: action.payload
             }
+
+
 
         default:
             return state

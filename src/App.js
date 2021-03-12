@@ -24,6 +24,7 @@ import AuthState from './context/autenticacion/AuthState'
 import AlertaState from './context/alertas/AlertaState'
 
 import RutaPrivada from './components/rutas/RutaPrivada'
+import AboutUs from './components/home/AboutUs'
 
 
 
@@ -41,13 +42,14 @@ function App() {
 
                 <Switch>
                   <Route exact path="/" component={Home} />
+                  <Route exact path="/aboutus" component={AboutUs} />
                   <Route exact path="/cart" component={Cart} />
                   <Route exact path="/store" component={Store} />
-                  <Route exact path="/category/:id" component={CategoryProduct} />
+                  <Route exact path="/category/:category" component={CategoryProduct} />
                   <Route exact path="/product/:id" component={StoreProduct} />
                   <Route exact path="/login" component={Login} />
                   <Route exact path="/signup" component={NuevaCuenta} />
-                  <RutaPrivada exact path="/proyectos" component={Proyectos} />
+                  <RutaPrivada exact path="/profile" component={Proyectos} />
                 </Switch>
               <Footer/>
               </Router>

@@ -5,13 +5,18 @@ import AuthReducer from './AuthReducer'
 import service from '../../config/axios'
 import tokenAuth from '../../config/token'
 
+import { useParams } from 'react-router-dom'
+
 import {
     REGISTRO_EXITOSO,
     REGISTRO_ERROR,
     OBTENER_USUARIO,
     LOGIN_EXITOSO,
     LOGIN_ERROR,
-    CERRAR_SESION
+    CERRAR_SESION,
+    AGREGAR_CARRITO,
+    EDITAR_USUARIO,
+    ELIMINAR_USUARIO
 } from '../../types'
 
 
@@ -23,7 +28,7 @@ const AuthState = props => {
         autenticado: null,
         usuario: null, // información del usuario
         mensaje: null,  // relacionado con las alertas
-        cargando: true
+        cargando: true,
     }
 
     const [state, dispatch] = useReducer(AuthReducer, initialState)
@@ -34,7 +39,7 @@ const AuthState = props => {
         console.log(datos)
         try{
             const respuesta = await service.post('/user', datos)
-            console.log(respuesta)
+
             dispatch({
                 type: REGISTRO_EXITOSO,
                 payload: respuesta.data
@@ -67,7 +72,7 @@ const AuthState = props => {
 
         try {
             const respuesta = await service.get('/auth')
-            console.log(respuesta)
+
             dispatch({
                 type: OBTENER_USUARIO,
                 payload: respuesta.data.user
@@ -114,6 +119,32 @@ const AuthState = props => {
         })
     }
 
+    const agregarCarrito = async (producto) => {
+        const result = await service.patch("/user/profile/edit", producto)
+        dispatch({
+            type: AGREGAR_CARRITO,
+            payload: result.data.profile
+        })
+    }
+
+
+    const editarUsuario = async (datos, id) => {
+        const respuesta = await service.put(`/user/profile/change/${id}`, datos)
+        dispatch({
+            type: EDITAR_USUARIO,
+            payload: respuesta.data.profile
+        })
+    }
+
+
+    const eliminarUsuario = async(info) => {
+        const result = await service.delete("/user/profile/delete", info)
+        dispatch({
+            type: ELIMINAR_USUARIO,
+            payload: result.info
+        })
+    }
+
     return (
         <AuthContext.Provider value={{
             token: state.token,
@@ -124,7 +155,10 @@ const AuthState = props => {
             registrarUsuario,
             iniciarSesion,
             usuarioAutenticado,
-            cerrarSesion
+            cerrarSesion,
+            agregarCarrito,
+            editarUsuario,
+            eliminarUsuario
         }}>
             {props.children}
         </AuthContext.Provider>

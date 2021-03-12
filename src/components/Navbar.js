@@ -1,10 +1,26 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect} from 'react'
+
+import {Link} from 'react-router-dom'
+
 import AuthContext from '../context/autenticacion/AuthContext'
+
 export default function Navbar() {
 
+    // CON ESTAS DOS LINEAS ACCEDES A TODO TU CHECKOUT
+    // EL CHECKOUT ESTÁ DENTRO DE USUARIO
 
-    const authctx = useContext(AuthContext)
-    console.log(authctx)
+    // usuario.checkout.map( () => {... y aquí renderizas los productos que quiero comprar})
+    // El botón que genera la orden, suma los precios y hace un post a orders
+    const ctxauth = useContext(AuthContext)
+    const { usuarioAutenticado, usuario, cerrarSesion } = ctxauth
+
+    console.log(usuarioAutenticado, usuario)
+
+    
+    useEffect(() => {
+        usuarioAutenticado()
+    }, [])
+
 
     return (
             <>
@@ -18,9 +34,7 @@ export default function Navbar() {
                     <span class="sr-only">Open main menu</span>
                     {/* <!--
                         Icon when menu is closed.
-
                         Heroicon name: outline/menu
-
                         Menu open: "hidden", Menu closed: "block"
                     --> */}
                     <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -28,9 +42,7 @@ export default function Navbar() {
                     </svg>
                     {/* <!--
                         Icon when menu is open.
-
                         Heroicon name: outline/x
-
                         Menu open: "block", Menu closed: "hidden"
                     --> */}
                     <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -40,56 +52,76 @@ export default function Navbar() {
                 </div>
                 <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                     <div class="flex-shrink-0 flex items-center">
-                    <img class="block lg:hidden h-10 w-auto" src="/logo_ds.png" alt="Workflow" />
+                    <Link to="/">
+                    <img href="/home" class="block lg:hidden h-10 w-auto" src="/logo_ds.png" alt="Workflow" />
                     <img class="hidden lg:block h-10 w-auto" src="/logo_ds.png" alt="Workflow" />
+                    </Link>
                     </div>
                     <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-                    {/* <!-- Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" --> */}
-                    <a href="/" class="text-pink-500 inline-flex items-center px-1 pt-1 border-b-2 text-lg font-medium">
+                    <a href="/" class="border-transparent text-pink-400 hover:text-pink-500 inline-flex items-center px-1 pt-1 border-b-2 text-lg font-medium">
                         Home
+                    </a>
+                    <a href="/aboutus" class="border-transparent text-pink-400 hover:text-pink-500 inline-flex items-center px-1 pt-1 border-b-2 text-lg font-medium">
+                        About Us
                     </a>
                     <a href="/store" class="border-transparent text-pink-400 hover:text-pink-500 inline-flex items-center px-1 pt-1 border-b-2 text-lg font-medium">
                         Store
                     </a>
-                    <a href="/cart" class="border-transparent text-pink-400 hover:text-pink-500 inline-flex items-center px-1 pt-1 border-b-2 text-lg font-medium">
-                        Cart
-                    </a>
-
                     </div>
                 </div>
 
                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                    {
+                        usuario ? null :
+                        (
+                            <>
+                                <Link to="/cart" class="border-transparent text-pink-400 hover:text-pink-500 inline-flex items-center px-1 pt-1 border-b-2 text-lg font-medium">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="black">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                                </svg>
+                                </Link>
 
-                    <a href="/signup" class="border-transparent text-pink-400 hover:text-pink-500 inline-flex items-center px-1 pt-1 border-b-2 text-lg font-medium">
-                        Sign Up
-                    </a>
-                    <a href="/login" class="border-transparent text-pink-400 hover:text-pink-500 inline-flex items-center px-1 pt-1 border-b-2 text-lg font-medium">
-                        Login
-                    </a>
+                                <Link to="/signup" class="border-transparent text-pink-400 hover:text-pink-500 inline-flex items-center px-1 pt-1 border-b-2 text-lg font-medium">
+                                    SignUp
+                                </Link>
+                                <Link to="/login" class="border-transparent text-pink-400 hover:text-pink-500 inline-flex items-center px-1 pt-1 border-b-2 text-lg font-medium">
+                                    Login
+                                </Link>
+                                
+                            </>
+                           
+                        )
+
+                    }
+                    
 
 
                     {/* <!-- Profile dropdown --> */}
-                    <div class="ml-3 relative">
-                    
-                    <div>
-                        <button type="button" class="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" id="user-menu" aria-expanded="false" aria-haspopup="true">
-                        <span class="sr-only">Open user menu</span>
-                        {
 
-                        }
-                        </button>
+                    
+                    <div class="ml-3 relative">
+                    <Link to="/profile">
+                    <div className="border-transparent underline text-pink-400 hover:text-pink-500 inline-flex items-center px-1 pt-1 border-b-2 text-lg font-medium">
+                        { usuario ? `Welcome ${usuario.name}` : null }
+                    </div> 
+                    </Link>
+
+                    <div className="border-transparent text-pink-400 hover:text-pink-500 inline-flex items-center px-1 pt-1 border-b-2 text-lg font-medium">
+                        <Link to="/cart">
+                        <span class="inline-block h-6 w-6 overflow-hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd" />
+                        </svg>
+                        </span>
+                        { usuario ? `${usuario.checkout.length} ` : null } 
+                        </Link>
                     </div>
 
-                    {/* <!--
-                        Dropdown menu, show/hide based on menu state.
-
-                        Entering: "transition ease-out duration-200"
-                        From: "transform opacity-0 scale-95"
-                        To: "transform opacity-100 scale-100"
-                        Leaving: "transition ease-in duration-75"
-                        From: "transform opacity-100 scale-100"
-                        To: "transform opacity-0 scale-95"
-                    --> */}
+                    <Link onClick={() => {cerrarSesion()}} class="inline-flex rounded-md shadow">
+                    <div class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-pink-400 hover:bg-pink-500">
+                        { usuario ? "Logout" : null }
+                    </div> 
+                    </Link>
                     </div>
                 </div>
                 </div>
